@@ -10,11 +10,15 @@ export const connectToDB = async () => {
     return;
   }
 
+  const mongoDBUrl = process.env.MONGODB_URL;
+
+  if (!mongoDBUrl) {
+    throw new Error("MONGODB_URL environment variable is not defined");
+  }
+
   try {
-    await mongoose.connect(process.env.MONGODB_URL, {
+    await mongoose.connect(mongoDBUrl, {
       dbName: "social-media-1",
-      useNewUrlParser: true,
-      useUnifiedTopology: true,
     });
 
     isConnected = true;
