@@ -1,15 +1,13 @@
-
-
 import User from "../models/User";
 import { connectToDB } from "../mongodb/mongoose";
 
 export const createOrUpdateUser = async (
-  id,
-  first_name,
-  last_name,
-  image_url,
-  email_addresses,
-  username
+  id: string,
+  first_name: string,
+  last_name: string,
+  image_url: string,
+  email_addresses: { email_address: string }[],
+  username: string
 ) => {
   try {
     await connectToDB();
@@ -35,7 +33,7 @@ export const createOrUpdateUser = async (
   }
 };
 
-export const deleteUser = async (id) => {
+export const deleteUser = async (id: string) => {
   try {
     await connectToDB();
     await User.findOneAndDelete({ clerkId: id });
